@@ -36,7 +36,7 @@
 # For a complete CI/CD sample to get started with GitHub Action workflows for Desktop Applications,
 # refer to https://github.com/microsoft/github-actions-for-desktop-apps
 
-name: .NET Core Desktop
+name: Build CnC_Remastered_Collection
 
 on:
   push:
@@ -74,9 +74,17 @@ jobs:
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
+      
+    # Install http://go.microsoft.com/fwlink/p/?LinkId=323507
+    - name: Install win8.1 sdk
+      run: |
+        Invoke-WebRequest http://go.microsoft.com/fwlink/p/?LinkId=323507 -OutFile "$env:TEMP/win-sdk-81.exe"
+        cmd /c "$env:TEMP/win-sdk-81.exe" /q /features OptionId.WindowsDesktopDebuggers OptionId.WindowsSoftwareDevelopmentKit
+      shell: powershell
 
-    # Restore the application to populate the obj folder with RuntimeIdentifiers
-    - name: Restore the application
+    
+    # Msbuild application
+    - name: Msbuild application
       run: msbuild -m $env:Solution_Name /nologo /p:Configuration=$env:Configuration,Platform=x86
       env:
         Configuration: ${{ matrix.configuration }}
