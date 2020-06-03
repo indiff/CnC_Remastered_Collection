@@ -78,8 +78,8 @@ jobs:
     # Install http://go.microsoft.com/fwlink/p/?LinkId=323507
     - name: Install win8.1 sdk
       run: |
-        Invoke-WebRequest http://go.microsoft.com/fwlink/p/?LinkId=323507 -OutFile "$env:TEMP/win-sdk-81.exe"
-        cmd /c "$env:TEMP/win-sdk-81.exe" /q /features OptionId.WindowsDesktopDebuggers OptionId.WindowsSoftwareDevelopmentKit
+        Invoke-WebRequest http://go.microsoft.com/fwlink/p/?LinkId=323507 -OutFile "win-sdk-81.exe"
+        cmd /c "win-sdk-81.exe" /q /features OptionId.WindowsDesktopDebuggers OptionId.WindowsSoftwareDevelopmentKit
       shell: powershell
 
     
