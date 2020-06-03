@@ -77,7 +77,7 @@ jobs:
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
-      run: msbuild -m $env:Solution_Name /nologo /p:Configuration=$env:Configuration,Platform=Win32
+      run: msbuild -m $env:Solution_Name /nologo /p:Configuration=$env:Configuration,Platform=x86
       env:
         Configuration: ${{ matrix.configuration }}
 
